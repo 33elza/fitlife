@@ -22,6 +22,9 @@ namespace FitLife.Models.DBModels
         public System.Data.Entity.DbSet<Exercise> Exercises { get; set; }
 
         public System.Data.Entity.DbSet<FitLife.Models.DBModels.Plan> Plans { get; set; }
+        public DbSet<Workout> Workouts { get; set; }
+        public DbSet<Set> Sets { get; set; }
+        public DbSet<Result> Results { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -208,6 +208,7 @@
     <Compile Include="Controllers\PlansController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\WorkoutsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -218,6 +219,10 @@
     <Compile Include="Migrations\201605030926584_02.cs" />
     <Compile Include="Migrations\201605030926584_02.Designer.cs">
       <DependentUpon>201605030926584_02.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605030934445_03.cs" />
+    <Compile Include="Migrations\201605030934445_03.Designer.cs">
+      <DependentUpon>201605030934445_03.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -308,6 +313,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605030926584_02.resx">
       <DependentUpon>201605030926584_02.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605030934445_03.resx">
+      <DependentUpon>201605030934445_03.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
