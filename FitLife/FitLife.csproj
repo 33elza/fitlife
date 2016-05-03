@@ -215,6 +215,10 @@
     <Compile Include="Migrations\201604211214147_01.Designer.cs">
       <DependentUpon>201604211214147_01.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605030926584_02.cs" />
+    <Compile Include="Migrations\201605030926584_02.Designer.cs">
+      <DependentUpon>201605030926584_02.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -222,6 +226,9 @@
     <Compile Include="Models\DBModels\Exercise.cs" />
     <Compile Include="Models\DBModels\IdentityModels.cs" />
     <Compile Include="Models\DBModels\Plan.cs" />
+    <Compile Include="Models\DBModels\Result.cs" />
+    <Compile Include="Models\DBModels\Set.cs" />
+    <Compile Include="Models\DBModels\Workout.cs" />
     <Compile Include="Models\DTO\PlanDTO.cs" />
     <Compile Include="Models\DTO\UserProfileDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -298,6 +305,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201604211214147_01.resx">
       <DependentUpon>201604211214147_01.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605030926584_02.resx">
+      <DependentUpon>201605030926584_02.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

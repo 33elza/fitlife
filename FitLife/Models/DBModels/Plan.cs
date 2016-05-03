@@ -12,5 +12,6 @@ namespace FitLife.Models.DBModels
         public ApplicationUser Author { get; set; }
         public string Description { get; set; }
         public ICollection<ApplicationUser> Followers { get; set; }
+        public ICollection<Workout> Workouts { get; set; }
     }
 }
