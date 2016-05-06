@@ -15,6 +15,7 @@ using AutoMapper;
 using System.Collections;
 using AutoMapper.QueryableExtensions;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 
 
@@ -25,7 +26,7 @@ namespace FitLife.Controllers
         private ApplicationUserManager _userManager;
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        public PlansController()  { }
+        public PlansController() { }
         public PlansController(ApplicationUserManager userManager)
         {
             UserManager = userManager;
@@ -43,7 +44,7 @@ namespace FitLife.Controllers
             }
         }
 
-        // GET: api/Users/051c9cf0-48d1-48dd-a58f-fcc6572c740b/FollowingPlans
+        // GET: api/Users/1d1ac9a1-5fd9-408b-8c9a-f047b143fad3/FollowingPlans
         [Route("api/Users/{id}/FollowingPlans")]
         public IQueryable<PlanDTO> GetFollowingPlans(string id)
         {
@@ -53,25 +54,36 @@ namespace FitLife.Controllers
                 return null;
             }
 
-            List<Plan> list = user.FollowingPlans.ToList();
+            List<Plan> planList = user.FollowingPlans.ToList();
 
-            var plans = Mapper.Map<List<PlanDTO>>(list);
+            var plans = Mapper.Map<List<PlanDTO>>(planList);
             return plans.AsQueryable<PlanDTO>();
 
-        
+
         }
 
         // GET: api/Plans
-        public IQueryable<Plan> GetPlans()
+        [HttpGet]
+        [Route("api/Plans")]
+        [ResponseType(typeof(PlanDTO))]
+        [AllowAnonymous]
+        public async Task<IHttpActionResult> GetPlans()
         {
-            return db.Plans;
+            var plans = db.Plans;
+            foreach (Plan plan in plans)
+            {
+                plan.Author = UserManager.FindById(plan.AuthorID);
+            }
+            return Ok(Mapper.Map<Plan[], IEnumerable<PlanDTO>>(await plans.ToArrayAsync()));
         }
 
         // GET: api/Plans/5
         [ResponseType(typeof(Plan))]
         public async Task<IHttpActionResult> GetPlan(int id)
         {
+            
             Plan plan = await db.Plans.FindAsync(id);
+            plan.Author = UserManager.FindById(plan.AuthorID);        
             if (plan == null)
             {
                 return NotFound();

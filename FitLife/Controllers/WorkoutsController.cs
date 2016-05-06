@@ -10,12 +10,29 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using FitLife.Models.DBModels;
+using FitLife.Models.DTO;
+using AutoMapper;
 
 namespace FitLife.Controllers
 {
     public class WorkoutsController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+
+        // GET: api/Plans/2/PlansWorkouts
+        [Route("api/Plans/{id}/PlansWorkouts")]
+        public async Task<IHttpActionResult> GetPlansWorkouts(int id)
+        {
+            Plan plan = await db.Plans.FindAsync(id);
+            if (plan == null)
+            {
+                return NotFound();
+            }
+            List<Workout> workoutList = plan.Workouts.ToList();
+            var workouts = Mapper.Map<List<WorkoutDTO>>(workoutList);
+
+            return Ok(workouts);    
+        }
 
         // GET: api/Workouts
         public IQueryable<Workout> GetWorkouts()

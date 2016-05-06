@@ -5,6 +5,8 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using FitLife.Models.DBModels;
 using System.Collections.Generic;
+using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace FitLife.Models
 {
@@ -14,6 +16,13 @@ namespace FitLife.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Info { get; set; }
+
+        [JsonIgnore]
+        [IgnoreDataMember] 
+        public virtual ICollection<Plan> Plans { get; set; }
+
+        [JsonIgnore]
+        [IgnoreDataMember] 
         public virtual ICollection<Plan> FollowingPlans { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager, string authenticationType)
         {

@@ -29,8 +29,12 @@ namespace FitLife.App_Start
             CreateMap<UserProfileDTO, ApplicationUser>()
                 .ForMember(dst => dst.Id, map => map.DoNotUseDestinationValue());
 
-            CreateMap<Plan, PlanDTO>()
-                .ForMember(dst => dst.Author, map => map.DoNotUseDestinationValue());
+            CreateMap<Plan, PlanDTO>();
+                
+           
+
+            CreateMap<Workout, WorkoutDTO>();
+                
                  
            
         }

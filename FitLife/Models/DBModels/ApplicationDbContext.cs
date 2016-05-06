@@ -34,7 +34,20 @@ namespace FitLife.Models.DBModels
             modelBuilder.Entity<ApplicationUser>()
                 .HasMany(c => c.FollowingPlans).WithMany(i => i.Followers)
                 .Map(x => x.MapLeftKey("UserId").MapRightKey("FollowingPlanId").ToTable("UserFollowingPlan"));
-               
+
+            modelBuilder.Entity<Plan>()
+                .HasMany(c => c.Followers).WithMany(t => t.FollowingPlans);
+
+            modelBuilder.Entity<Plan>()
+                .HasRequired(c => c.Author).WithMany(t => t.Plans).WillCascadeOnDelete(false);
+
+           // modelBuilder.Entity<Workout>()
+            //    .HasRequired(c => c.Plan).WithMany(c => c.Workouts).WillCascadeOnDelete(true);
+            modelBuilder.Entity<ApplicationUser>()
+                .HasMany(c => c.Plans).WithRequired(t => t.Author).WillCascadeOnDelete(false);
+            modelBuilder.Entity<ApplicationUser>()
+                .HasMany(c => c.Plans).WithRequired(t => t.Author).HasForeignKey(f => f.AuthorID);
+                
         }
     }
 }
