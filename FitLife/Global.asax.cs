@@ -21,6 +21,8 @@ namespace FitLife
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             AutoMapperConfig.Configure();
+            
+            
         }
     }
 }

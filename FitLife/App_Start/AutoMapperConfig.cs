@@ -32,9 +32,8 @@ namespace FitLife.App_Start
             CreateMap<Plan, PlanDTO>()
                 .ForMember(d => d.Url, d => d.MapFrom(m => "api/Plans/" + m.ID));
                 
-           
-
-            CreateMap<Workout, WorkoutDTO>();
+           CreateMap<Workout, WorkoutDTO>();
+           CreateMap<Set, SetDTO>();
                 
                  
            

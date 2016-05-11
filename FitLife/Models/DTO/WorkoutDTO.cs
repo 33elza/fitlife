@@ -13,6 +13,6 @@ namespace FitLife.Models.DTO
         public string Description { get; set; }
         public DateTime Date { get; set; }
         public PlanDTO Plan { get; set; }
-        public ICollection<Set> Sets { get; set; }
+        public ICollection<SetDTO> Sets { get; set; }
     }
 }

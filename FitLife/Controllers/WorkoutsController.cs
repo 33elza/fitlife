@@ -41,6 +41,7 @@ namespace FitLife.Controllers
 
         // GET: api/Plans/2/PlansWorkouts
         [Route("api/Plans/{id}/PlansWorkouts")]
+        [ResponseType(typeof(WorkoutDTO))]
         public async Task<IHttpActionResult> GetPlansWorkouts(int id)
         {
             Plan plan = await db.Plans.FindAsync(id);
@@ -55,14 +56,22 @@ namespace FitLife.Controllers
                 {
                     plan.Workouts.Add(workout);
                 }
-                  foreach (Set set in db.Sets)
-                 {
-                     if (set.WorkoutID == workout.ID)
+                  
+            }     
+            foreach (Workout workout in plan.Workouts)
+            {
+                foreach (Set set in db.Sets)
+                {
+                    if (set.WorkoutID == workout.ID)
                         workout.Sets.Add(set);
-                 }
-            }           
+                }
+            }
           
             List<Workout> workoutList = plan.Workouts.ToList();
+           foreach (Workout workout in workoutList)
+           {
+                var sets = Mapper.Map<List<SetDTO>>(workout.Sets);
+           }
             var workouts = Mapper.Map<List<WorkoutDTO>>(workoutList);
 
             return Ok(workouts);    

@@ -205,7 +205,11 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ExercisesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MvcControllers\AccountController.cs" />
+    <Compile Include="Controllers\MvcControllers\ManageController.cs" />
+    <Compile Include="Controllers\MvcControllers\PlansController.cs" />
     <Compile Include="Controllers\PlansController.cs" />
+    <Compile Include="Controllers\SetsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\WorkoutsController.cs" />
@@ -250,6 +254,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
+    <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\DBModels\ApplicationDbContext.cs" />
     <Compile Include="Models\DBModels\Exercise.cs" />
@@ -259,8 +264,10 @@
     <Compile Include="Models\DBModels\Set.cs" />
     <Compile Include="Models\DBModels\Workout.cs" />
     <Compile Include="Models\DTO\PlanDTO.cs" />
+    <Compile Include="Models\DTO\SetDTO.cs" />
     <Compile Include="Models\DTO\UserProfileDTO.cs" />
     <Compile Include="Models\DTO\WorkoutDTO.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
@@ -321,9 +328,19 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Plans\Create.cshtml" />
+    <Content Include="Views\Plans\Delete.cshtml" />
+    <Content Include="Views\Plans\Details.cshtml" />
+    <Content Include="Views\Plans\Edit.cshtml" />
+    <Content Include="Views\Plans\Index.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Manage\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
