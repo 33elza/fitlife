@@ -78,7 +78,7 @@ namespace FitLife.Controllers
         }
 
         // GET: api/Plans/5
-        [ResponseType(typeof(Plan))]
+        [ResponseType(typeof(PlanDTO))]
         public async Task<IHttpActionResult> GetPlan(int id)
         {
             
@@ -89,7 +89,7 @@ namespace FitLife.Controllers
                 return NotFound();
             }
 
-            return Ok(plan);
+            return Ok(Mapper.Map<Plan,PlanDTO>(plan));
         }
 
         // PUT: api/Plans/5

@@ -17,6 +17,7 @@ namespace FitLife.Models.DBModels
 
         [Required]
         public Plan Plan { get; set; }
+        public int PlanID { get; set; }
         public ICollection<Set> Sets { get; set; }
     }
 }

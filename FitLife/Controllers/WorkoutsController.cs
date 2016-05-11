@@ -12,22 +12,56 @@ using System.Web.Http.Description;
 using FitLife.Models.DBModels;
 using FitLife.Models.DTO;
 using AutoMapper;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity;
 
 namespace FitLife.Controllers
 {
     public class WorkoutsController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationUserManager _userManager;
+
+         public WorkoutsController() { }
+         public WorkoutsController(ApplicationUserManager userManager)
+        {
+            UserManager = userManager;
+        }
+         public ApplicationUserManager UserManager
+         {
+             get
+             {
+                 return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+             }
+             private set
+             {
+                 _userManager = value;
+             }
+         }
 
         // GET: api/Plans/2/PlansWorkouts
         [Route("api/Plans/{id}/PlansWorkouts")]
         public async Task<IHttpActionResult> GetPlansWorkouts(int id)
         {
             Plan plan = await db.Plans.FindAsync(id);
+            plan.Author = UserManager.FindById(plan.AuthorID);
             if (plan == null)
             {
                 return NotFound();
             }
+            foreach (Workout workout in db.Workouts)
+            {
+                if (workout.PlanID == id)
+                {
+                    plan.Workouts.Add(workout);
+                }
+                  foreach (Set set in db.Sets)
+                 {
+                     if (set.WorkoutID == workout.ID)
+                        workout.Sets.Add(set);
+                 }
+            }           
+          
             List<Workout> workoutList = plan.Workouts.ToList();
             var workouts = Mapper.Map<List<WorkoutDTO>>(workoutList);
 

@@ -14,6 +14,7 @@ namespace FitLife.Models.DBModels
         public string Description { get; set; }
         public Exercise Exercise { get; set; }
         public Workout Workout { get; set; }
+        public int WorkoutID { get; set; }
 
     }
 }

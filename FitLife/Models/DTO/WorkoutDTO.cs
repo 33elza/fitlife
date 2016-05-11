@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FitLife.Models.DBModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,5 +13,6 @@ namespace FitLife.Models.DTO
         public string Description { get; set; }
         public DateTime Date { get; set; }
         public PlanDTO Plan { get; set; }
+        public ICollection<Set> Sets { get; set; }
     }
 }
