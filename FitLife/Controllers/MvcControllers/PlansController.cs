@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FitLife.Models.DBModels;
+using FitLife.Models;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity;
 
@@ -41,8 +42,10 @@ namespace FitLife.Controllers.MvcControllers
         // GET: Plans
         public async Task<ActionResult> Index()
         {
+            ApplicationUser user =  UserManager.FindById(User.Identity.GetUserId());
+            var myPlans =  user.FollowingPlans;
             var plans = db.Plans.Include(p => p.Author);
-            return View(await plans.ToListAsync());
+            return View(myPlans);
         }
 
         // GET: Plans/Details/5
