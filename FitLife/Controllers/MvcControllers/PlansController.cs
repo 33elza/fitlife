@@ -11,6 +11,9 @@ using FitLife.Models.DBModels;
 using FitLife.Models;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity;
+using AutoMapper;
+using FitLife.Models.DTO;
+using FitLife.Infrastructure;
 
 namespace FitLife.Controllers.MvcControllers
 {
@@ -48,6 +51,15 @@ namespace FitLife.Controllers.MvcControllers
             return View(myPlans);
         }
 
+        // GET: MyPlans
+        public async Task<ActionResult> MyPlans()
+        {
+            ApplicationUser user = UserManager.FindById(User.Identity.GetUserId());
+            var myPlans = user.Plans;
+            var plans = Mapper.Map<List<PlanDTO>>(myPlans);
+            return View(plans);
+        }
+
         // GET: Plans/Details/5
         public async Task<ActionResult> Details(int? id)
         {
@@ -74,15 +86,31 @@ namespace FitLife.Controllers.MvcControllers
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID,Name,AuthorID,Description")] Plan plan)
+      //  [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Create([Bind(Include = "ID,Name,AuthorID,Description")] Plan plan, FormCollection form)
         {
+          //  plan.Author = UserManager.FindById(User.Identity.GetUserId());
+            plan.AuthorID = User.Identity.GetUserId();
+
+         
+
             if (ModelState.IsValid)
             {
                 db.Plans.Add(plan);
                 await db.SaveChangesAsync();
+
+                 HttpPostedFileBase hpf = Request.Files["imagefile"] as HttpPostedFileBase;
+                 UploadImage up = new UploadImage();
+
+                 int id = plan.ID;
+                 string planName = Convert.ToString(plan.ID);
+                 
+                 up.SaveImage(hpf, planName);
+
                 return RedirectToAction("Index");
             }
+
+           
 
             ViewBag.AuthorID = new SelectList(UserManager.Users, "Id", "FirstName", plan.AuthorID);
             return View(plan);
@@ -111,6 +139,7 @@ namespace FitLife.Controllers.MvcControllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "ID,Name,AuthorID,Description")] Plan plan)
         {
+            plan.AuthorID = User.Identity.GetUserId();
             if (ModelState.IsValid)
             {
                 db.Entry(plan).State = EntityState.Modified;
@@ -145,6 +174,20 @@ namespace FitLife.Controllers.MvcControllers
             db.Plans.Remove(plan);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Uploader()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Uploader(FormCollection form)
+        {
+            HttpPostedFileBase hpf = Request.Files["imagefile"] as HttpPostedFileBase;
+            UploadImage up = new UploadImage();
+            up.SaveImage(hpf, "plan");
+
+            return RedirectToAction("uploader");
         }
 
         protected override void Dispose(bool disposing)

@@ -216,6 +216,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\ImageResizer.cs" />
+    <Compile Include="Infrastructure\UploadImage.cs" />
     <Compile Include="Migrations\201604211214147_01.cs" />
     <Compile Include="Migrations\201604211214147_01.Designer.cs">
       <DependentUpon>201604211214147_01.cs</DependentUpon>
@@ -251,6 +253,10 @@
     <Compile Include="Migrations\201605070920197_09.cs" />
     <Compile Include="Migrations\201605070920197_09.Designer.cs">
       <DependentUpon>201605070920197_09.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605221043203_10.cs" />
+    <Compile Include="Migrations\201605221043203_10.Designer.cs">
+      <DependentUpon>201605221043203_10.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -337,9 +343,12 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Plans\MyPlans.cshtml" />
+    <Content Include="Views\Plans\Uploader.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Uploads\" />
     <Folder Include="Views\Manage\" />
   </ItemGroup>
   <ItemGroup>
@@ -376,6 +385,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605070920197_09.resx">
       <DependentUpon>201605070920197_09.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605221043203_10.resx">
+      <DependentUpon>201605221043203_10.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

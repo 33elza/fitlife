@@ -49,5 +49,7 @@ namespace FitLife.Models.DBModels
                 .HasMany(c => c.Plans).WithRequired(t => t.Author).HasForeignKey(f => f.AuthorID);
                 
         }
+
+        public System.Data.Entity.DbSet<FitLife.Models.DTO.PlanDTO> PlanDTOes { get; set; }
     }
 }
