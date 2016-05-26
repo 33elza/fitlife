@@ -43,7 +43,7 @@ namespace FitLife.Controllers.MvcControllers
         }
 
         // GET: Plans
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
             ApplicationUser user =  UserManager.FindById(User.Identity.GetUserId());
             var myPlans =  user.FollowingPlans;
@@ -52,7 +52,7 @@ namespace FitLife.Controllers.MvcControllers
         }
 
         // GET: MyPlans
-        public async Task<ActionResult> MyPlans()
+        public ActionResult MyPlans()
         {
             ApplicationUser user = UserManager.FindById(User.Identity.GetUserId());
             var myPlans = user.Plans;
@@ -89,10 +89,7 @@ namespace FitLife.Controllers.MvcControllers
       //  [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "ID,Name,AuthorID,Description")] Plan plan, FormCollection form)
         {
-          //  plan.Author = UserManager.FindById(User.Identity.GetUserId());
-            plan.AuthorID = User.Identity.GetUserId();
-
-         
+            plan.AuthorID = User.Identity.GetUserId();       
 
             if (ModelState.IsValid)
             {
@@ -102,15 +99,12 @@ namespace FitLife.Controllers.MvcControllers
                  HttpPostedFileBase hpf = Request.Files["imagefile"] as HttpPostedFileBase;
                  UploadImage up = new UploadImage();
 
-                 int id = plan.ID;
                  string planName = Convert.ToString(plan.ID);
                  
                  up.SaveImage(hpf, planName);
 
                 return RedirectToAction("Index");
             }
-
-           
 
             ViewBag.AuthorID = new SelectList(UserManager.Users, "Id", "FirstName", plan.AuthorID);
             return View(plan);
@@ -128,6 +122,7 @@ namespace FitLife.Controllers.MvcControllers
             {
                 return HttpNotFound();
             }
+            
             ViewBag.AuthorID = new SelectList(UserManager.Users, "Id", "FirstName", plan.AuthorID);
             return View(plan);
         }
@@ -144,10 +139,34 @@ namespace FitLife.Controllers.MvcControllers
             {
                 db.Entry(plan).State = EntityState.Modified;
                 await db.SaveChangesAsync();
+
+                HttpPostedFileBase hpf = Request.Files["imagefile"] as HttpPostedFileBase;
+                UploadImage up = new UploadImage();
+
+                string planName = Convert.ToString(plan.ID);
+
+                up.SaveImage(hpf, planName);
+
                 return RedirectToAction("Index");
             }
             ViewBag.AuthorID = new SelectList(UserManager.Users, "Id", "FirstName", plan.AuthorID);
             return View(plan);
+        }
+
+
+     
+        public async Task<ActionResult> PlansWorkouts(int? id)
+        {
+             
+            Plan plan = await db.Plans.FindAsync(id);
+            plan.Author = UserManager.FindById(plan.AuthorID);
+
+            if (plan == null)
+            {
+                return HttpNotFound();
+            }
+            var workouts = db.Workouts.Where(c => c.PlanID == id);
+            return View(workouts);
         }
 
         // GET: Plans/Delete/5

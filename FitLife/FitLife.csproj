@@ -208,6 +208,7 @@
     <Compile Include="Controllers\MvcControllers\AccountController.cs" />
     <Compile Include="Controllers\MvcControllers\ManageController.cs" />
     <Compile Include="Controllers\MvcControllers\PlansController.cs" />
+    <Compile Include="Controllers\MvcControllers\WorkoutsController.cs" />
     <Compile Include="Controllers\PlansController.cs" />
     <Compile Include="Controllers\SetsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -345,11 +346,23 @@
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Plans\MyPlans.cshtml" />
     <Content Include="Views\Plans\Uploader.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Workouts\Create.cshtml" />
+    <Content Include="Views\Workouts\Delete.cshtml" />
+    <Content Include="Views\Workouts\Details.cshtml" />
+    <Content Include="Views\Workouts\Edit.cshtml" />
+    <Content Include="Views\Workouts\Index.cshtml" />
+    <Content Include="Views\Plans\PlansWorkouts.cshtml" />
+    <Content Include="Views\Shared\_navPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Uploads\" />
-    <Folder Include="Views\Manage\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

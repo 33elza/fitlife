@@ -1,4 +1,4 @@
-﻿@model FitLife.Models.DBModels.Plan
+﻿@model FitLife.Models.DBModels.Workout
 
 @{
     ViewBag.Title = "Details";
@@ -7,15 +7,23 @@
 <h2>Details</h2>
 
 <div>
-    <h4>Plan</h4>
+    <h4>Workout</h4>
     <hr />
     <dl class="dl-horizontal">
-       <dt>
-            @Html.DisplayNameFor(model => model.Name)
+        <dt>
+            @Html.DisplayNameFor(model => model.Plan.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.Plan.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
         </dd>
 
         <dt>
@@ -30,6 +38,5 @@
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index") 
-    @Html.ActionLink("Тренировки", "PlansWorkouts", new {id = Model.ID })
+    @Html.ActionLink("Back to List", "Index")
 </p>
