@@ -38,7 +38,7 @@ namespace FitLife.Controllers.MvcControllers
         }
 
         // GET: Workouts/Create
-        public ActionResult Create(int planID)
+        public ActionResult AddWorkout()
         {
             ViewBag.PlanID = new SelectList(db.Plans, "ID", "Name");
             return View();
@@ -49,14 +49,17 @@ namespace FitLife.Controllers.MvcControllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID,Date,Description,PlanID")] Workout workout, int planID)
+        public async Task<ActionResult> AddWorkout([Bind(Include = "ID,Date,Description,PlanID")] Workout workout, int planID)
         {
             workout.PlanID = planID;
-            if (ModelState.IsValid)
+            workout.Plan = db.Plans.Find(planID);
+            workout.Date = DateTime.Now;
+           
+            if (!(ModelState.IsValid))
             {
                 db.Workouts.Add(workout);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("PlansWorkouts", "Plans", new { id = planID });
             }
 
             ViewBag.PlanID = new SelectList(db.Plans, "ID", "Name", workout.PlanID);
@@ -86,14 +89,30 @@ namespace FitLife.Controllers.MvcControllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "ID,Date,Description,PlanID")] Workout workout)
         {
-            if (ModelState.IsValid)
+            int planID = workout.PlanID;
+            workout.Plan = await db.Plans.FindAsync(planID);
+            if (!(ModelState.IsValid))
             {
                 db.Entry(workout).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("PlansWorkouts", "Plans", new { id = workout.PlanID });
             }
             ViewBag.PlanID = new SelectList(db.Plans, "ID", "Name", workout.PlanID);
             return View(workout);
+        }
+
+        // GET: Workouts/WorkoutsSets/5
+        public async Task<ActionResult> WorkoutsSets (int? id)
+        {
+            Workout workout = await db.Workouts.FindAsync(id);
+            if (workout == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.WorkoutID = id;
+            
+            var sets = db.Sets.Where(c => c.WorkoutID == id);
+            return View(sets);
         }
 
         // GET: Workouts/Delete/5
@@ -119,7 +138,7 @@ namespace FitLife.Controllers.MvcControllers
             Workout workout = await db.Workouts.FindAsync(id);
             db.Workouts.Remove(workout);
             await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("PlansWorkouts", "Plans", new { id = workout.PlanID });
         }
 
         protected override void Dispose(bool disposing)

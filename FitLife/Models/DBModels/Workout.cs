@@ -13,10 +13,9 @@ namespace FitLife.Models.DBModels
         public DateTime? Date { get; set; }
 
         [Required]
-        public string Description { get; set; }
-
-        [Required]
+        public string Description { get; set; }       
         public Plan Plan { get; set; }
+        [Required]
         public int PlanID { get; set; }
         public ICollection<Set> Sets { get; set; }
     }

@@ -1,0 +1,48 @@
+﻿@model FitLife.Models.DBModels.Result
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Результат</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Weight)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Time)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Note)
+        </th>
+        <th></th>
+    </tr>
+
+
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => modelItem.Weight)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => modelItem.Quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => modelItem.Time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => modelItem.Note)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+            @Html.ActionLink("Details", "Details", new { id = Model.ID }) |
+        </td>
+    </tr>
+
+
+</table>

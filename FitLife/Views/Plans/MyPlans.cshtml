@@ -4,7 +4,7 @@
     ViewBag.Title = "MyPlans";
 }
 
-<h2>MyPlans</h2>
+<h2>Мои планы</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -32,9 +32,9 @@
         </td>
         <td>
             @Html.ActionLink("Тренировки", "PlansWorkouts", new { id = item.ID }) |
-            @Html.ActionLink("Добавить тренировку", "Create", "Workouts", new { planID = item.ID }) |
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.ActionLink("Добавить тренировку", "AddWorkout", "Workouts", new { planID = item.ID }, null) |
+            @Html.ActionLink("Редактировать", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Удалить", "Delete", new { id=item.ID })
         </td>
     </tr>
 }

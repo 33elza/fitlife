@@ -8,25 +8,22 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FitLife.Models.DBModels;
-using FitLife.Models;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity;
-using AutoMapper;
-using FitLife.Models.DTO;
 using FitLife.Infrastructure;
+using FitLife.Models;
 
 namespace FitLife.Controllers.MvcControllers
 {
-    public class PlansController : Controller
+    public class ExercisesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         private ApplicationUserManager _userManager;
-      
-        public PlansController(ApplicationUserManager userManager)
+         public ExercisesController(ApplicationUserManager userManager)
         {
             UserManager = userManager;
         }
-        public PlansController()
+         public ExercisesController()
         {
 
         }
@@ -42,172 +39,126 @@ namespace FitLife.Controllers.MvcControllers
             }
         }
 
-        // GET: Plans
+        // GET: Exercises
         public ActionResult Index()
         {
             ApplicationUser user =  UserManager.FindById(User.Identity.GetUserId());
-            var myPlans =  user.FollowingPlans;
-            var plans = db.Plans.Include(p => p.Author);
-            return View(myPlans);
+            var exercises = user.Exercises;
+            return View(exercises);
         }
 
-        // GET: MyPlans
-        public ActionResult MyPlans()
-        {
-            ApplicationUser user = UserManager.FindById(User.Identity.GetUserId());
-            var myPlans = user.Plans;
-            var plans = Mapper.Map<List<PlanDTO>>(myPlans);
-            return View(plans);
-        }
-
-        // GET: Plans/Details/5
+        // GET: Exercises/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Plan plan = await db.Plans.FindAsync(id);
-            if (plan == null)
+            Exercise exercise = await db.Exercises.FindAsync(id);
+            if (exercise == null)
             {
                 return HttpNotFound();
             }
-            return View(plan);
+            return View(exercise);
         }
 
-        // GET: Plans/Create
+        // GET: Exercises/Create
         public ActionResult Create()
         {
-            ViewBag.AuthorID = new SelectList(UserManager.Users, "Id", "FirstName");
             return View();
         }
 
-        // POST: Plans/Create
+        // POST: Exercises/Create
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-      //  [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID,Name,AuthorID,Description")] Plan plan, FormCollection form)
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Create([Bind(Include = "ID,ExcerciseName,Description")] Exercise exercise)
         {
-            plan.AuthorID = User.Identity.GetUserId();       
-            
+            exercise.AuthorID = User.Identity.GetUserId();
             if (ModelState.IsValid)
             {
-                db.Plans.Add(plan);
+                db.Exercises.Add(exercise);
                 await db.SaveChangesAsync();
 
-                 HttpPostedFileBase hpf = Request.Files["imagefile"] as HttpPostedFileBase;
-                 UploadImage up = new UploadImage();
+                HttpPostedFileBase hpf = Request.Files["imagefile"] as HttpPostedFileBase;
+                UploadImage up = new UploadImage();
 
-                 string planName = Convert.ToString(plan.ID);
-                 
-                 up.SaveImage(hpf, planName);
+                string exerciseName = Convert.ToString(exercise.ID);
+
+                up.SaveImage(hpf, exerciseName);
 
                 return RedirectToAction("Index");
             }
 
-            ViewBag.AuthorID = new SelectList(UserManager.Users, "Id", "FirstName", plan.AuthorID);
-            return View(plan);
+            return View(exercise);
         }
 
-        // GET: Plans/Edit/5
+        // GET: Exercises/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Plan plan = await db.Plans.FindAsync(id);
-            if (plan == null)
+            Exercise exercise = await db.Exercises.FindAsync(id);
+            if (exercise == null)
             {
                 return HttpNotFound();
             }
-            
-            ViewBag.AuthorID = new SelectList(UserManager.Users, "Id", "FirstName", plan.AuthorID);
-            return View(plan);
+            return View(exercise);
         }
 
-        // POST: Plans/Edit/5
+        // POST: Exercises/Edit/5
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ID,Name,AuthorID,Description")] Plan plan)
+        public async Task<ActionResult> Edit([Bind(Include = "ID,ExcerciseName,Description")] Exercise exercise)
         {
-            plan.AuthorID = User.Identity.GetUserId();
+            exercise.AuthorID = User.Identity.GetUserId();
+
             if (ModelState.IsValid)
             {
-                db.Entry(plan).State = EntityState.Modified;
+                db.Entry(exercise).State = EntityState.Modified;
                 await db.SaveChangesAsync();
 
                 HttpPostedFileBase hpf = Request.Files["imagefile"] as HttpPostedFileBase;
                 UploadImage up = new UploadImage();
 
-                string planName = Convert.ToString(plan.ID);
+                string exerciseName = Convert.ToString(exercise.ID);
 
-                up.SaveImage(hpf, planName);
+                up.SaveImage(hpf, exerciseName);
 
                 return RedirectToAction("Index");
             }
-            ViewBag.AuthorID = new SelectList(UserManager.Users, "Id", "FirstName", plan.AuthorID);
-            return View(plan);
+            return View(exercise);
         }
 
-
-        // GET: Plans/PlansWorkouts/5
-        public async Task<ActionResult> PlansWorkouts(int? id)
-        {
-             Plan plan = await db.Plans.FindAsync(id);
-            //plan.Author = UserManager.FindById(plan.AuthorID);
-
-            if (plan == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.PlanID = id;
-            ViewBag.PlanName = plan.Name;
-            var workouts = db.Workouts.Where(c => c.PlanID == id);
-            return View(workouts);
-        }
-
-        // GET: Plans/Delete/5
+        // GET: Exercises/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Plan plan = await db.Plans.FindAsync(id);
-            if (plan == null)
+            Exercise exercise = await db.Exercises.FindAsync(id);
+            if (exercise == null)
             {
                 return HttpNotFound();
             }
-            return View(plan);
+            return View(exercise);
         }
 
-        // POST: Plans/Delete/5
+        // POST: Exercises/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Plan plan = await db.Plans.FindAsync(id);
-            db.Plans.Remove(plan);
+            Exercise exercise = await db.Exercises.FindAsync(id);
+            db.Exercises.Remove(exercise);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
-        }
-
-        public ActionResult Uploader()
-        {
-            return View();
-        }
-        [HttpPost]
-        public ActionResult Uploader(FormCollection form)
-        {
-            HttpPostedFileBase hpf = Request.Files["imagefile"] as HttpPostedFileBase;
-            UploadImage up = new UploadImage();
-            up.SaveImage(hpf, "plan");
-
-            return RedirectToAction("uploader");
         }
 
         protected override void Dispose(bool disposing)

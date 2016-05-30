@@ -20,6 +20,10 @@ namespace FitLife.Models
         [JsonIgnore]
         [IgnoreDataMember] 
         public virtual ICollection<Plan> Plans { get; set; }
+      
+        [JsonIgnore]
+        [IgnoreDataMember]
+        public virtual ICollection<Exercise> Exercises { get; set; }
 
         [JsonIgnore]
         [IgnoreDataMember] 

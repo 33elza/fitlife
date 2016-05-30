@@ -1,0 +1,64 @@
+﻿@model FitLife.Models.DBModels.Set
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+
+<h3>Вы уверены, что хотите удалить этот подход?</h3>
+<div>
+    <h4>Set</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Workout.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Workout.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Weight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Weight)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            @Html.ActionLink("Назад", "WorkoutsSets", "Workouts", new { id = Model.WorkoutID }, null)
+        </div>
+    }
+</div>

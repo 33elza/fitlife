@@ -206,10 +206,14 @@
     <Compile Include="Controllers\ExercisesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MvcControllers\AccountController.cs" />
+    <Compile Include="Controllers\MvcControllers\ExercisesController.cs" />
     <Compile Include="Controllers\MvcControllers\ManageController.cs" />
     <Compile Include="Controllers\MvcControllers\PlansController.cs" />
+    <Compile Include="Controllers\MvcControllers\ResultsController.cs" />
+    <Compile Include="Controllers\MvcControllers\SetsController.cs" />
     <Compile Include="Controllers\MvcControllers\WorkoutsController.cs" />
     <Compile Include="Controllers\PlansController.cs" />
+    <Compile Include="Controllers\ResultsController.cs" />
     <Compile Include="Controllers\SetsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -258,6 +262,30 @@
     <Compile Include="Migrations\201605221043203_10.cs" />
     <Compile Include="Migrations\201605221043203_10.Designer.cs">
       <DependentUpon>201605221043203_10.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605281203288_11.cs" />
+    <Compile Include="Migrations\201605281203288_11.Designer.cs">
+      <DependentUpon>201605281203288_11.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605291108533_12.cs" />
+    <Compile Include="Migrations\201605291108533_12.Designer.cs">
+      <DependentUpon>201605291108533_12.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605291128523_13.cs" />
+    <Compile Include="Migrations\201605291128523_13.Designer.cs">
+      <DependentUpon>201605291128523_13.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605301251110_14.cs" />
+    <Compile Include="Migrations\201605301251110_14.Designer.cs">
+      <DependentUpon>201605301251110_14.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605301307191_15.cs" />
+    <Compile Include="Migrations\201605301307191_15.Designer.cs">
+      <DependentUpon>201605301307191_15.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605301310368_16.cs" />
+    <Compile Include="Migrations\201605301310368_16.Designer.cs">
+      <DependentUpon>201605301310368_16.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -352,13 +380,29 @@
     <Content Include="Views\Manage\ManageLogins.cshtml" />
     <Content Include="Views\Manage\SetPassword.cshtml" />
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
-    <Content Include="Views\Workouts\Create.cshtml" />
+    <Content Include="Views\Workouts\AddWorkout.cshtml" />
     <Content Include="Views\Workouts\Delete.cshtml" />
     <Content Include="Views\Workouts\Details.cshtml" />
     <Content Include="Views\Workouts\Edit.cshtml" />
     <Content Include="Views\Workouts\Index.cshtml" />
     <Content Include="Views\Plans\PlansWorkouts.cshtml" />
     <Content Include="Views\Shared\_navPartial.cshtml" />
+    <Content Include="Views\Sets\Create.cshtml" />
+    <Content Include="Views\Sets\Delete.cshtml" />
+    <Content Include="Views\Sets\Details.cshtml" />
+    <Content Include="Views\Sets\Edit.cshtml" />
+    <Content Include="Views\Sets\Index.cshtml" />
+    <Content Include="Views\Workouts\WorkoutsSets.cshtml" />
+    <Content Include="Views\Results\Create.cshtml" />
+    <Content Include="Views\Results\Delete.cshtml" />
+    <Content Include="Views\Results\Details.cshtml" />
+    <Content Include="Views\Results\Edit.cshtml" />
+    <Content Include="Views\Results\Index.cshtml" />
+    <Content Include="Views\Exercises\Create.cshtml" />
+    <Content Include="Views\Exercises\Delete.cshtml" />
+    <Content Include="Views\Exercises\Details.cshtml" />
+    <Content Include="Views\Exercises\Edit.cshtml" />
+    <Content Include="Views\Exercises\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -401,6 +445,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605221043203_10.resx">
       <DependentUpon>201605221043203_10.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605281203288_11.resx">
+      <DependentUpon>201605281203288_11.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605291108533_12.resx">
+      <DependentUpon>201605291108533_12.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605291128523_13.resx">
+      <DependentUpon>201605291128523_13.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605301251110_14.resx">
+      <DependentUpon>201605301251110_14.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605301307191_15.resx">
+      <DependentUpon>201605301307191_15.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605301310368_16.resx">
+      <DependentUpon>201605301310368_16.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

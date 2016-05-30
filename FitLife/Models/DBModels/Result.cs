@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -13,5 +14,7 @@ namespace FitLife.Models.DBModels
         public int Time { get; set; }
         public string Note { get; set; }
         public Set Set { get; set; }
+        [Required]
+        public int SetID { get; set; }
     }
 }

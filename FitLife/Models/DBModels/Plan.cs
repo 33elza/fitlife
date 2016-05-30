@@ -14,10 +14,24 @@ namespace FitLife.Models.DBModels
         public ApplicationUser Author { get; set; }
         public string AuthorID { get; set; }
         public string Description { get; set; }
+      //  public string DifficultyLevel { get; set; }
+       // public string Sex { get; set; }
         public ICollection<ApplicationUser> Followers { get; set; }
 
         [JsonIgnore]
         [IgnoreDataMember] 
         public ICollection<Workout> Workouts { get; set; }
+    }
+    public enum DifficultyLevel
+    {
+        High,
+        Middle,
+        Low
+    }
+    public enum Sex
+    {
+        Male,
+        Female,
+        Both
     }
 }

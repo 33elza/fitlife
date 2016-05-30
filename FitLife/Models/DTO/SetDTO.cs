@@ -13,6 +13,7 @@ namespace FitLife.Models.DTO
         public int Quantity { get; set; }
         public int Time { get; set; }
         public string Description { get; set; }
+        public Result Result { get; set; }
        // public Exercise Exercise { get; set; }
         //public Workout Workout { get; set; }
        // public int WorkoutID { get; set; }

@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2>Создать новый план</h2>
 
 
 @using (Html.BeginForm("Create", "Plans", FormMethod.Post, new { enctype = "multipart/form-data" })) 
@@ -24,10 +24,10 @@
         </div>
 
         @*<div class="form-group">
-            @Html.LabelFor(model => model.AuthorID, "AuthorID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.DifficultyLevel, "DifficultyLevel", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("AuthorID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.AuthorID, "", new { @class = "text-danger" })
+                @Html.DropDownList( "DifficultyLevel", FitLife.Models.DBModels.DifficultyLevel , htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMesageFor(model => model.DifficultyLevel, "", new { @class = "text-danger" })
             </div>
         </div>*@
 
@@ -47,7 +47,7 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
+                    <input type="submit" value="Создать" class="btn btn-default" />
                 </div>
             </div>
        

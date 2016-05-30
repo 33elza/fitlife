@@ -1,0 +1,70 @@
+﻿@model IEnumerable<FitLife.Models.DBModels.Set>
+
+@{
+    ViewBag.Title = "WorkoutsSets";
+}
+
+<h2>Подходы</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", "Sets", new { WorkoutID = ViewBag.WorkoutID }, null)
+</p>
+<table class="table">
+
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Weight) 
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity) 
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Time) 
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @if (item.Weight != null)
+                { 
+                    @Html.DisplayFor(modelItem => item.Weight) }
+                else
+                { <p>-</p>  }
+            </td>
+            <td>
+                @if (item.Quantity != null)
+                {
+                    @Html.DisplayFor(modelItem => item.Quantity) }
+                else
+                { <p>-</p>  }
+            </td>
+            <td>
+                @if (item.Time != null)
+                {
+                    @Html.DisplayFor(modelItem => item.Time) }
+                else
+                { <p>-</p>  }
+            </td>
+            <td>
+                @if (item.Description != null)
+                {
+                    @Html.DisplayFor(modelItem => item.Description) }
+                else
+                { <p>-</p> }
+            </td>
+            <td>
+                @Html.ActionLink("Результат", "Index", "Results", new { id = item.ResultID }, null) |
+                @Html.ActionLink("Редактировать", "Edit", "Sets", new { id = item.ID, workoutID = item.WorkoutID }, null) |
+                @Html.ActionLink("Подробнее", "Details", "Sets", new { id = item.ID }, null) |
+                @Html.ActionLink("Удалить", "Delete", "Sets", new { id = item.ID }, null)
+            </td>
+        </tr>
+    }
+
+</table>

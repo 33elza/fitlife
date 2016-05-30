@@ -1,26 +1,24 @@
-﻿@model FitLife.Models.DBModels.Workout
+﻿@model FitLife.Models.DBModels.Exercise
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Create";
 }
 
-<h2>Редактирование тренировки</h2>
+<h2>Создание упражнения</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Workout</h4>
+        <h4>Exercise</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ID)
-
         <div class="form-group">
-            @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ExcerciseName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.ExcerciseName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ExcerciseName, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -32,15 +30,19 @@
             </div>
         </div>
 
+        <form method="post" enctype="multipart/form-data">
+            <input type="file" id="imagefile" name="imagefile" /><br />
+
+        </form>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Сохранить" class="btn btn-default" />
+                <input type="submit" value="Создать" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Назад", "PlansWorkouts", "Plans", new { id = Model.PlanID }, null)
+    @Html.ActionLink("Назад", "Index")
 </div>
