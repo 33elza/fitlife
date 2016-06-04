@@ -87,9 +87,10 @@ namespace FitLife.Controllers.MvcControllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
       //  [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID,Name,AuthorID,Description")] Plan plan, FormCollection form)
+        public async Task<ActionResult> Create([Bind(Include = "ID,Name,AuthorID,Description,DifficultyLevel,Sex")] Plan plan, FormCollection form)
         {
-            plan.AuthorID = User.Identity.GetUserId();       
+            plan.AuthorID = User.Identity.GetUserId();    
+            
             
             if (ModelState.IsValid)
             {

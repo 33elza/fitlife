@@ -40,6 +40,33 @@
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
             </div>
         </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.DifficultyLevel, "DifficultyLevel", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.RadioButtonFor(model => model.DifficultyLevel, DifficultyLevel.High)
+                <span>Высокий</span>
+
+                @Html.RadioButtonFor(model => model.DifficultyLevel, DifficultyLevel.Middle, new { @checked = true })
+                <span>Средний</span>
+
+                @Html.RadioButtonFor(model => model.DifficultyLevel, DifficultyLevel.Low)
+                <span>Низкий</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Sex, "Sex", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.RadioButtonFor(model => model.Sex, Sex.Male)
+                <span>Для мужчин</span>
+
+                @Html.RadioButtonFor(model => model.Sex, Sex.Female)
+                <span>Для женщин</span>
+
+                @Html.RadioButtonFor(model => model.Sex, Sex.Both, new { @checked = true })
+                <span>Для всех</span>
+            </div>
+        </div>
         <form method="post" enctype="multipart/form-data">
             <input type="file" id="imagefile" name="imagefile" /><br />
 

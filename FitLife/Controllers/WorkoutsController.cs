@@ -50,23 +50,9 @@ namespace FitLife.Controllers
             {
                 return NotFound();
             }
-            foreach (Workout workout in db.Workouts)
-            {
-                if (workout.PlanID == id)
-                {
-                    plan.Workouts.Add(workout);
-                }
-                  
-            }     
-            foreach (Workout workout in plan.Workouts)
-            {
-                foreach (Set set in db.Sets)
-                {
-                    if (set.WorkoutID == workout.ID)
-                        workout.Sets.Add(set);
-                }
-            }
-          
+
+            GetWorkoutsWithSets(plan);
+
             List<Workout> workoutList = plan.Workouts.ToList();
            foreach (Workout workout in workoutList)
            {
@@ -75,6 +61,27 @@ namespace FitLife.Controllers
             var workouts = Mapper.Map<List<WorkoutDTO>>(workoutList);
 
             return Ok(workouts);    
+        }
+
+        public void GetWorkoutsWithSets(Plan plan)
+        {
+
+            foreach (Workout workout in db.Workouts)
+            {
+                if (workout.PlanID == plan.ID)
+                {
+                    plan.Workouts.Add(workout);
+
+                }
+            }
+            foreach (Workout workout in plan.Workouts)
+            {
+                foreach (Set set in db.Sets)
+                {
+                    if (set.WorkoutID == workout.ID)
+                        workout.Sets.Add(set);
+                }
+            }
         }
 
         // GET: api/Workouts

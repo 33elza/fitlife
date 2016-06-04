@@ -18,7 +18,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 
 
-
 namespace FitLife.Controllers
 {
     public class PlansController : ApiController
@@ -58,8 +57,6 @@ namespace FitLife.Controllers
 
             var plans = Mapper.Map<List<PlanDTO>>(planList);
             return plans.AsQueryable<PlanDTO>();
-
-
         }
 
         // GET: api/Plans
@@ -90,6 +87,22 @@ namespace FitLife.Controllers
             }
 
             return Ok(Mapper.Map<Plan,PlanDTO>(plan));
+        }
+
+        // GET: api/Plans
+        [HttpGet]
+        [Route("api/Plans/by_categories/{difficultylevel}/{sex}")]
+        public IQueryable<PlanDTO> FindPlanByCategories(string DifficultyLevel, string Sex)
+        {
+            var plans = new List<PlanDTO>();
+            foreach (Plan plan in db.Plans)
+            {
+                if ((plan.DifficultyLevel == DifficultyLevel) && (plan.Sex == Sex))
+                {
+                     plans.Add(Mapper.Map<PlanDTO>(plan));
+                }
+            }
+            return plans.AsQueryable<PlanDTO>();
         }
 
         // PUT: api/Plans/5

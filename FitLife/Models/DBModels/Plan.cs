@@ -14,8 +14,8 @@ namespace FitLife.Models.DBModels
         public ApplicationUser Author { get; set; }
         public string AuthorID { get; set; }
         public string Description { get; set; }
-      //  public string DifficultyLevel { get; set; }
-       // public string Sex { get; set; }
+        public string DifficultyLevel { get; set; }
+        public string Sex { get; set; }
         public ICollection<ApplicationUser> Followers { get; set; }
 
         [JsonIgnore]
@@ -24,9 +24,9 @@ namespace FitLife.Models.DBModels
     }
     public enum DifficultyLevel
     {
-        High,
-        Middle,
-        Low
+        High = 1,
+        Middle = 2,
+        Low = 3
     }
     public enum Sex
     {
