@@ -86,7 +86,7 @@ namespace FitLife.Controllers.MvcControllers
 
                 string exerciseName = Convert.ToString(exercise.ID);
 
-                up.SaveImage(hpf, exerciseName);
+                up.SaveExerciseImage(hpf, exerciseName);
 
                 return RedirectToAction("Index");
             }
@@ -128,7 +128,7 @@ namespace FitLife.Controllers.MvcControllers
 
                 string exerciseName = Convert.ToString(exercise.ID);
 
-                up.SaveImage(hpf, exerciseName);
+                up.SaveExerciseImage(hpf, exerciseName);
 
                 return RedirectToAction("Index");
             }

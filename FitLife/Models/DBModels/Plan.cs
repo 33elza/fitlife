@@ -30,8 +30,8 @@ namespace FitLife.Models.DBModels
     }
     public enum Sex
     {
-        Male,
-        Female,
-        Both
+        Male = 1,
+        Female = 2,
+        Both = 3
     }
 }

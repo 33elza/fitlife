@@ -20,7 +20,7 @@ namespace FitLife.Infrastructure
         const int maxHeight = 600;
 
 
-        public void SaveImage(HttpPostedFileBase hpf, string name)
+        public void SavePlanImage(HttpPostedFileBase hpf, string name)
         {
             if (hpf != null && hpf.ContentLength != 0)
             {
@@ -28,7 +28,22 @@ namespace FitLife.Infrastructure
                 ImageResizer resizer = new ImageResizer(128);
                 Image image_128 = resizer.CropAndResize(uploadedImage);
                 var fileName = Path.ChangeExtension(name + "_128", ".jpg");
-                string root = HttpContext.Current.Server.MapPath("~/Uploads");
+                string root = HttpContext.Current.Server.MapPath("~/App_Data/plans");
+                var filePath = Path.Combine(root, fileName);
+                if (System.IO.File.Exists(filePath))
+                    System.IO.File.Delete(filePath);
+                hpf.SaveAs(filePath);
+            }
+        }
+        public void SaveExerciseImage(HttpPostedFileBase hpf, string name)
+        {
+            if (hpf != null && hpf.ContentLength != 0)
+            {
+                Image uploadedImage = Image.FromStream(hpf.InputStream);
+                ImageResizer resizer = new ImageResizer(128);
+                Image image_128 = resizer.CropAndResize(uploadedImage);
+                var fileName = Path.ChangeExtension(name + "_128", ".jpg");
+                string root = HttpContext.Current.Server.MapPath("~/App_Data/exercises");
                 var filePath = Path.Combine(root, fileName);
                 if (System.IO.File.Exists(filePath))
                     System.IO.File.Delete(filePath);

@@ -307,6 +307,10 @@
     <Compile Include="Migrations\201605301638410_21.Designer.cs">
       <DependentUpon>201605301638410_21.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606050802589_22.cs" />
+    <Compile Include="Migrations\201606050802589_22.Designer.cs">
+      <DependentUpon>201606050802589_22.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountModels.cs" />
@@ -356,6 +360,9 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <None Include="Properties\PublishProfiles\profile1.pubxml" />
+    <None Include="Properties\PublishProfiles\profile2.pubxml" />
+    <None Include="Properties\PublishProfiles\profile3.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -367,7 +374,9 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -425,7 +434,8 @@
     <Content Include="Views\Exercises\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="App_Data\excercises\" />
+    <Folder Include="App_Data\plans\" />
     <Folder Include="Uploads\" />
   </ItemGroup>
   <ItemGroup>
@@ -498,6 +508,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605301638410_21.resx">
       <DependentUpon>201605301638410_21.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606050802589_22.resx">
+      <DependentUpon>201606050802589_22.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -20,6 +20,7 @@ using System.Diagnostics;
 
 namespace FitLife.Controllers
 {
+     [Authorize]
     public class PlansController : ApiController
     {
         private ApplicationUserManager _userManager;
@@ -44,10 +45,15 @@ namespace FitLife.Controllers
         }
 
         // GET: api/Users/1d1ac9a1-5fd9-408b-8c9a-f047b143fad3/FollowingPlans
-        [Route("api/Users/{id}/FollowingPlans")]
-        public IQueryable<PlanDTO> GetFollowingPlans(string id)
+        [HttpGet]
+        [Route("api/Users/FollowingPlans")]
+        [ResponseType(typeof(PlanDTO))]
+        public async Task<IHttpActionResult> GetFollowingPlans()
         {
-            ApplicationUser user = UserManager.FindById(id);
+           // ApplicationUser user = UserManager.FindById(id);
+            string userId = User.Identity.GetUserId();
+            ApplicationUser user = await UserManager.FindByIdAsync(userId);
+           
             if (user == null)
             {
                 return null;
@@ -56,7 +62,7 @@ namespace FitLife.Controllers
             List<Plan> planList = user.FollowingPlans.ToList();
 
             var plans = Mapper.Map<List<PlanDTO>>(planList);
-            return plans.AsQueryable<PlanDTO>();
+            return Ok(plans.AsQueryable<PlanDTO>());
         }
 
         // GET: api/Plans
@@ -75,19 +81,19 @@ namespace FitLife.Controllers
         }
 
         // GET: api/Plans/5
-        [ResponseType(typeof(PlanDTO))]
-        public async Task<IHttpActionResult> GetPlan(int id)
-        {
+        //[ResponseType(typeof(PlanDTO))]
+        //public async Task<IHttpActionResult> GetPlan(int id)
+        //{
             
-            Plan plan = await db.Plans.FindAsync(id);
-            plan.Author = UserManager.FindById(plan.AuthorID);        
-            if (plan == null)
-            {
-                return NotFound();
-            }
+        //    Plan plan = await db.Plans.FindAsync(id);
+        //    plan.Author = UserManager.FindById(plan.AuthorID);        
+        //    if (plan == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return Ok(Mapper.Map<Plan,PlanDTO>(plan));
-        }
+        //    return Ok(Mapper.Map<Plan,PlanDTO>(plan));
+        //}
 
         // GET: api/Plans
         [HttpGet]

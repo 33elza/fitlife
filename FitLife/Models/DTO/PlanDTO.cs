@@ -11,8 +11,9 @@ namespace FitLife.Models.DTO
         public string Url { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-       // public byte[] Image { get; set; }       
+        public string DifficultyLevel { get; set; }
+        public string Sex { get; set; }     
         public UserProfileDTO Author { get; set; }
-      //  public virtual ICollection<UserProfileDTO> Followers { get; set; }
+
     }
 }

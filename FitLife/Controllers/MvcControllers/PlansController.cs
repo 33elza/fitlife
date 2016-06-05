@@ -100,9 +100,9 @@ namespace FitLife.Controllers.MvcControllers
                  HttpPostedFileBase hpf = Request.Files["imagefile"] as HttpPostedFileBase;
                  UploadImage up = new UploadImage();
 
-                 string planName = Convert.ToString(plan.ID);
+                 string planName = "plan_" + Convert.ToString(plan.ID);
                  
-                 up.SaveImage(hpf, planName);
+                 up.SavePlanImage(hpf, planName);
 
                 return RedirectToAction("Index");
             }
@@ -144,9 +144,9 @@ namespace FitLife.Controllers.MvcControllers
                 HttpPostedFileBase hpf = Request.Files["imagefile"] as HttpPostedFileBase;
                 UploadImage up = new UploadImage();
 
-                string planName = Convert.ToString(plan.ID);
+                string planName = "plan_" + Convert.ToString(plan.ID);
 
-                up.SaveImage(hpf, planName);
+                up.SavePlanImage(hpf, planName);
 
                 return RedirectToAction("Index");
             }
@@ -206,7 +206,7 @@ namespace FitLife.Controllers.MvcControllers
         {
             HttpPostedFileBase hpf = Request.Files["imagefile"] as HttpPostedFileBase;
             UploadImage up = new UploadImage();
-            up.SaveImage(hpf, "plan");
+            up.SavePlanImage(hpf, "plan");
 
             return RedirectToAction("uploader");
         }
