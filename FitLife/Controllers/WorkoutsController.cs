@@ -21,7 +21,6 @@ namespace FitLife.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         private ApplicationUserManager _userManager;
-
          public WorkoutsController() { }
          public WorkoutsController(ApplicationUserManager userManager)
         {
@@ -62,8 +61,7 @@ namespace FitLife.Controllers
 
             return Ok(workouts);    
         }
-
-        public void GetWorkoutsWithSets(Plan plan)
+       public void GetWorkoutsWithSets(Plan plan)
         {
 
             foreach (Workout workout in db.Workouts)
@@ -83,8 +81,7 @@ namespace FitLife.Controllers
                 }
             }
         }
-
-        // GET: api/Workouts
+      // GET: api/Workouts
         public IQueryable<Workout> GetWorkouts()
         {
             return db.Workouts;
@@ -102,8 +99,7 @@ namespace FitLife.Controllers
 
             return Ok(workout);
         }
-
-        // PUT: api/Workouts/5
+      // PUT: api/Workouts/5
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutWorkout(int id, Workout workout)
         {
@@ -137,7 +133,6 @@ namespace FitLife.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
-
         // POST: api/Workouts
         [ResponseType(typeof(Workout))]
         public async Task<IHttpActionResult> PostWorkout(Workout workout)
@@ -152,8 +147,7 @@ namespace FitLife.Controllers
 
             return CreatedAtRoute("DefaultApi", new { id = workout.ID }, workout);
         }
-
-        // DELETE: api/Workouts/5
+       // DELETE: api/Workouts/5
         [ResponseType(typeof(Workout))]
         public async Task<IHttpActionResult> DeleteWorkout(int id)
         {
@@ -168,8 +162,7 @@ namespace FitLife.Controllers
 
             return Ok(workout);
         }
-
-        protected override void Dispose(bool disposing)
+       protected override void Dispose(bool disposing)
         {
             if (disposing)
             {

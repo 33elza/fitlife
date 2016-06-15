@@ -7,7 +7,7 @@
 <h2>Подходы</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create", "Sets", new { WorkoutID = ViewBag.WorkoutID }, null)
+    @Html.ActionLink("Создать подход", "Create", "Sets", new { WorkoutID = ViewBag.WorkoutID }, null)
 </p>
 <table class="table">
 
@@ -21,8 +21,11 @@
         <th>
             @Html.DisplayNameFor(model => model.Time) 
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.Description)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Exercise)
         </th>
         <th></th>
     </tr>
@@ -51,15 +54,18 @@
                 else
                 { <p>-</p>  }
             </td>
-            <td>
+            @*<td>
                 @if (item.Description != null)
                 {
                     @Html.DisplayFor(modelItem => item.Description) }
                 else
                 { <p>-</p> }
-            </td>
+            </td>*@
             <td>
-                @Html.ActionLink("Результат", "Index", "Results", new { id = item.ResultID }, null) |
+                
+                @Html.DisplayFor(modelItem => item.Exercise.ExcerciseName)
+                </td>
+            <td>
                 @Html.ActionLink("Редактировать", "Edit", "Sets", new { id = item.ID, workoutID = item.WorkoutID }, null) |
                 @Html.ActionLink("Подробнее", "Details", "Sets", new { id = item.ID }, null) |
                 @Html.ActionLink("Удалить", "Delete", "Sets", new { id = item.ID }, null)

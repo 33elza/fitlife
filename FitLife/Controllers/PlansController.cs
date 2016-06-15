@@ -31,8 +31,7 @@ namespace FitLife.Controllers
         {
             UserManager = userManager;
         }
-
-        public ApplicationUserManager UserManager
+     public ApplicationUserManager UserManager
         {
             get
             {
@@ -43,8 +42,7 @@ namespace FitLife.Controllers
                 _userManager = value;
             }
         }
-
-        // GET: api/Users/1d1ac9a1-5fd9-408b-8c9a-f047b143fad3/FollowingPlans
+      // GET: api/Users/FollowingPlans
         [HttpGet]
         [Route("api/Users/FollowingPlans")]
         [ResponseType(typeof(PlanDTO))]
@@ -65,7 +63,7 @@ namespace FitLife.Controllers
             return Ok(plans.AsQueryable<PlanDTO>());
         }
 
-        // GET: api/Plans
+       // GET: api/Plans
         [HttpGet]
         [Route("api/Plans")]
         [ResponseType(typeof(PlanDTO))]
@@ -81,19 +79,19 @@ namespace FitLife.Controllers
         }
 
         // GET: api/Plans/5
-        //[ResponseType(typeof(PlanDTO))]
-        //public async Task<IHttpActionResult> GetPlan(int id)
-        //{
+        [ResponseType(typeof(PlanDTO))]
+        public async Task<IHttpActionResult> GetPlan(int id)
+        {
             
-        //    Plan plan = await db.Plans.FindAsync(id);
-        //    plan.Author = UserManager.FindById(plan.AuthorID);        
-        //    if (plan == null)
-        //    {
-        //        return NotFound();
-        //    }
+            Plan plan = await db.Plans.FindAsync(id);
+            plan.Author = UserManager.FindById(plan.AuthorID);        
+            if (plan == null)
+            {
+                return NotFound();
+            }
 
-        //    return Ok(Mapper.Map<Plan,PlanDTO>(plan));
-        //}
+            return Ok(Mapper.Map<Plan,PlanDTO>(plan));
+        }
 
         // GET: api/Plans
         [HttpGet]
@@ -113,7 +111,7 @@ namespace FitLife.Controllers
 
         // PUT: api/Plans/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutPlan(int id, Plan plan)
+       public async Task<IHttpActionResult> PutPlan(int id, Plan plan)
         {
             if (!ModelState.IsValid)
             {
@@ -145,8 +143,7 @@ namespace FitLife.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
-
-        // POST: api/Plans
+       // POST: api/Plans
         [ResponseType(typeof(Plan))]
         public async Task<IHttpActionResult> PostPlan(Plan plan)
         {
@@ -160,8 +157,7 @@ namespace FitLife.Controllers
 
             return CreatedAtRoute("DefaultApi", new { id = plan.ID }, plan);
         }
-
-        // DELETE: api/Plans/5
+      // DELETE: api/Plans/5
         [ResponseType(typeof(Plan))]
         public async Task<IHttpActionResult> DeletePlan(int id)
         {
@@ -176,8 +172,7 @@ namespace FitLife.Controllers
 
             return Ok(plan);
         }
-
-        protected override void Dispose(bool disposing)
+       protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
@@ -185,8 +180,7 @@ namespace FitLife.Controllers
             }
             base.Dispose(disposing);
         }
-
-        private bool PlanExists(int id)
+         private bool PlanExists(int id)
         {
             return db.Plans.Count(e => e.ID == id) > 0;
         }

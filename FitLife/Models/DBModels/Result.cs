@@ -16,5 +16,6 @@ namespace FitLife.Models.DBModels
         public Set Set { get; set; }
         [Required]
         public int SetID { get; set; }
+        public string UserID { get; set; }
     }
 }

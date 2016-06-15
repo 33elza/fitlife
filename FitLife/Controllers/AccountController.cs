@@ -25,18 +25,15 @@ namespace FitLife.Controllers
     {
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
-
         public AccountController()
         {
         }
-
         public AccountController(ApplicationUserManager userManager,
             ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
         {
             UserManager = userManager;
             AccessTokenFormat = accessTokenFormat;
         }
-
         public ApplicationUserManager UserManager
         {
             get
@@ -48,7 +45,6 @@ namespace FitLife.Controllers
                 _userManager = value;
             }
         }
-
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
 
         // GET api/Account/UserInfo
@@ -65,8 +61,7 @@ namespace FitLife.Controllers
                 LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null
             };
         }
-
-        // POST api/Account/Logout
+       // POST api/Account/Logout
         [Route("Logout")]
         public IHttpActionResult Logout()
         {
@@ -95,7 +90,6 @@ namespace FitLife.Controllers
                     ProviderKey = linkedAccount.ProviderKey
                 });
             }
-
             if (user.PasswordHash != null)
             {
                 logins.Add(new UserLoginInfoViewModel
@@ -104,8 +98,7 @@ namespace FitLife.Controllers
                     ProviderKey = user.UserName,
                 });
             }
-
-            return new ManageInfoViewModel
+           return new ManageInfoViewModel
             {
                 LocalLoginProvider = LocalLoginProvider,
                 Email = user.UserName,
@@ -113,7 +106,6 @@ namespace FitLife.Controllers
                 ExternalLoginProviders = GetExternalLogins(returnUrl, generateState)
             };
         }
-
         // POST api/Account/ChangePassword
         [Route("ChangePassword")]
         public async Task<IHttpActionResult> ChangePassword(ChangePasswordBindingModel model)
@@ -125,15 +117,13 @@ namespace FitLife.Controllers
 
             IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
                 model.NewPassword);
-            
+
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
             }
-
             return Ok();
         }
-
         // POST api/Account/SetPassword
         [Route("SetPassword")]
         public async Task<IHttpActionResult> SetPassword(SetPasswordBindingModel model)
@@ -152,7 +142,6 @@ namespace FitLife.Controllers
 
             return Ok();
         }
-
         // POST api/Account/AddExternalLogin
         [Route("AddExternalLogin")]
         public async Task<IHttpActionResult> AddExternalLogin(AddExternalLoginBindingModel model)
@@ -190,8 +179,7 @@ namespace FitLife.Controllers
 
             return Ok();
         }
-
-        // POST api/Account/RemoveLogin
+       // POST api/Account/RemoveLogin
         [Route("RemoveLogin")]
         public async Task<IHttpActionResult> RemoveLogin(RemoveLoginBindingModel model)
         {
@@ -219,8 +207,7 @@ namespace FitLife.Controllers
 
             return Ok();
         }
-
-        // GET api/Account/ExternalLogin
+       // GET api/Account/ExternalLogin
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
         [AllowAnonymous]
@@ -258,9 +245,9 @@ namespace FitLife.Controllers
             if (hasRegistered)
             {
                 Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-                
-                 ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(UserManager,
-                    OAuthDefaults.AuthenticationType);
+
+                ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(UserManager,
+                   OAuthDefaults.AuthenticationType);
                 ClaimsIdentity cookieIdentity = await user.GenerateUserIdentityAsync(UserManager,
                     CookieAuthenticationDefaults.AuthenticationType);
 
@@ -276,7 +263,6 @@ namespace FitLife.Controllers
 
             return Ok();
         }
-
         // GET api/Account/ExternalLogins?returnUrl=%2F&generateState=true
         [AllowAnonymous]
         [Route("ExternalLogins")]
@@ -317,7 +303,6 @@ namespace FitLife.Controllers
 
             return logins;
         }
-
         // POST api/Account/Register
         [AllowAnonymous]
         [Route("Register")]
@@ -339,8 +324,7 @@ namespace FitLife.Controllers
 
             return Ok();
         }
-
-        // POST api/Account/RegisterExternal
+       // POST api/Account/RegisterExternal
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("RegisterExternal")]
@@ -368,12 +352,11 @@ namespace FitLife.Controllers
             result = await UserManager.AddLoginAsync(user.Id, info.Login);
             if (!result.Succeeded)
             {
-                return GetErrorResult(result); 
+                return GetErrorResult(result);
             }
             return Ok();
         }
-
-        protected override void Dispose(bool disposing)
+       protected override void Dispose(bool disposing)
         {
             if (disposing && _userManager != null)
             {
@@ -419,7 +402,6 @@ namespace FitLife.Controllers
 
             return null;
         }
-
         private class ExternalLoginData
         {
             public string LoginProvider { get; set; }
@@ -467,7 +449,6 @@ namespace FitLife.Controllers
                 };
             }
         }
-
         private static class RandomOAuthStateGenerator
         {
             private static RandomNumberGenerator _random = new RNGCryptoServiceProvider();
@@ -488,7 +469,6 @@ namespace FitLife.Controllers
                 return HttpServerUtility.UrlTokenEncode(data);
             }
         }
-
         #endregion
     }
 }

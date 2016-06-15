@@ -1,5 +1,5 @@
 ﻿@model FitLife.Models.DBModels.Plan
-
+@using FitLife.Models.DBModels
 @{
     ViewBag.Title = "Edit";
 }
@@ -12,7 +12,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Plan</h4>
+     
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ID)
@@ -41,7 +41,7 @@
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.DifficultyLevel, "DifficultyLevel", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.DifficultyLevel, "Уровень сложности", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.RadioButtonFor(model => model.DifficultyLevel, DifficultyLevel.High)
                 <span>Высокий</span>
@@ -55,7 +55,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Sex, "Sex", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Sex, "Пол спортсменов", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.RadioButtonFor(model => model.Sex, Sex.Male)
                 <span>Для мужчин</span>

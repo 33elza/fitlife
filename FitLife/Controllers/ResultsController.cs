@@ -10,11 +10,29 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using FitLife.Models.DBModels;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity;
 
 namespace FitLife.Controllers
 {
     public class ResultsController : ApiController
     {
+        private ApplicationUserManager _userManager;
+        public ResultsController(ApplicationUserManager userManager)
+        {
+            UserManager = userManager;
+        }
+     public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: api/Results
@@ -75,6 +93,7 @@ namespace FitLife.Controllers
         [ResponseType(typeof(Result))]
         public async Task<IHttpActionResult> PostResult(Result result)
         {
+            result.UserID = User.Identity.GetUserId();
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

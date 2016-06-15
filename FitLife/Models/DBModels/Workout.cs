@@ -9,10 +9,12 @@ namespace FitLife.Models.DBModels
     public class Workout
     {
         public int ID { get; set; }
-        
+         [Display(Name = "Дата")]
+        [DataType(DataType.Date)]
         public DateTime? Date { get; set; }
 
         [Required]
+        [Display(Name = "Описание")]
         public string Description { get; set; }       
         public Plan Plan { get; set; }
         [Required]

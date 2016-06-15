@@ -10,7 +10,9 @@ namespace FitLife.Models.DBModels
     {
         [Key]
         public int ID { get; set; }
+         [Display(Name = "Название")]
         public string ExcerciseName { get; set; }
+         [Display(Name = "Описание")]
         public string Description { get; set; }
         public string AuthorID { get; set; }
         public ApplicationUser Author { get; set; }

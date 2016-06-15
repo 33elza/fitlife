@@ -16,14 +16,12 @@ namespace FitLife.Controllers
     public class ExercisesController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
-        // GET: api/Exercises
+      // GET: api/Exercises
         public IQueryable<Exercise> GetExercises()
         {
             return db.Exercises;
         }
-
-        // GET: api/Exercises/5
+       // GET: api/Exercises/5
         [ResponseType(typeof(Exercise))]
         public async Task<IHttpActionResult> GetExercise(int id)
         {
@@ -35,8 +33,7 @@ namespace FitLife.Controllers
 
             return Ok(exercise);
         }
-
-        // PUT: api/Exercises/5
+       // PUT: api/Exercises/5
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutExercise(int id, Exercise exercise)
         {
@@ -70,8 +67,7 @@ namespace FitLife.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
-
-        // POST: api/Exercises
+       // POST: api/Exercises
         [ResponseType(typeof(Exercise))]
         public async Task<IHttpActionResult> PostExercise(Exercise exercise)
         {
@@ -85,7 +81,6 @@ namespace FitLife.Controllers
 
             return CreatedAtRoute("DefaultApi", new { id = exercise.ID }, exercise);
         }
-
         // DELETE: api/Exercises/5
         [ResponseType(typeof(Exercise))]
         public async Task<IHttpActionResult> DeleteExercise(int id)
@@ -101,7 +96,6 @@ namespace FitLife.Controllers
 
             return Ok(exercise);
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -110,7 +104,6 @@ namespace FitLife.Controllers
             }
             base.Dispose(disposing);
         }
-
         private bool ExerciseExists(int id)
         {
             return db.Exercises.Count(e => e.ID == id) > 0;

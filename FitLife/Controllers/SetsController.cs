@@ -16,14 +16,12 @@ namespace FitLife.Controllers
     public class SetsController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
-        // GET: api/Sets
+     // GET: api/Sets
         public IQueryable<Set> GetSets()
         {
             return db.Sets;
         }
-
-        // GET: api/Sets/5
+     // GET: api/Sets/5
         [ResponseType(typeof(Set))]
         public async Task<IHttpActionResult> GetSet(int id)
         {
@@ -35,8 +33,7 @@ namespace FitLife.Controllers
 
             return Ok(set);
         }
-
-        // PUT: api/Sets/5
+       // PUT: api/Sets/5
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutSet(int id, Set set)
         {
@@ -70,8 +67,7 @@ namespace FitLife.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
-
-        // POST: api/Sets
+       // POST: api/Sets
         [ResponseType(typeof(Set))]
         public async Task<IHttpActionResult> PostSet(Set set)
         {
@@ -85,8 +81,7 @@ namespace FitLife.Controllers
 
             return CreatedAtRoute("DefaultApi", new { id = set.ID }, set);
         }
-
-        // DELETE: api/Sets/5
+       // DELETE: api/Sets/5
         [ResponseType(typeof(Set))]
         public async Task<IHttpActionResult> DeleteSet(int id)
         {
@@ -101,8 +96,7 @@ namespace FitLife.Controllers
 
             return Ok(set);
         }
-
-        protected override void Dispose(bool disposing)
+       protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
